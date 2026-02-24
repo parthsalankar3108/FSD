@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Filter</title>
+</head>
+<body>
+
+<h2>Open Console to See Output</h2>
+
+<script>
+
+// Step 1: Create JSON data (Product List)
+let products = [
+    { name: "Laptop", price: 50000 },
+    { name: "Phone", price: 20000 },
+    { name: "Headphones", price: 3000 },
+    { name: "Tablet", price: 25000 }
+];
+
+// Step 2: Display all products in console
+console.log("All Products:");
+products.forEach(function(product) {
+    console.log("Name:", product.name, "| Price:", product.price);
+});
+
+// Step 3: Function to filter products by minimum price
+function filterProducts(minPrice) {
+    console.log("\nFiltered Products (Price >= " + minPrice + "):");
+
+    let filtered = products.filter(function(product) {
+        return product.price >= minPrice;
+    });
+
+    filtered.forEach(function(product) {
+        console.log("Name:", product.name, "| Price:", product.price);
+    });
+}
+
+// Step 4: Call function (Example: filter price >= 20000)
+filterProducts(20000);
+
+
+// OPTIONAL PART (Very Simple Simulation of Async Fetch)
+
+function fetchProducts() {
+    return new Promise(function(resolve, reject) {
+        setTimeout(function() {
+            resolve("Product data fetched successfully");
+        }, 2000);
+    });
+}
+
+function fetchReviews() {
+    return new Promise(function(resolve, reject) {
+        setTimeout(function() {
+            reject("Error fetching reviews");
+        }, 2000);
+    });
+}
+
+Promise.all([fetchProducts(), fetchReviews()])
+    .then(function(results) {
+        console.log(results);
+    })
+    .catch(function(error) {
+        console.log("One of the operations failed:", error);
+    });
+
+</script>
+
+</body>
+</html>
